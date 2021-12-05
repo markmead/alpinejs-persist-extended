@@ -1,0 +1,22 @@
+{
+  "name": "alpinejs-persist-extended",
+  "version": "1.0.0",
+  "description": "Extends the official Alpine JS plugin $persist to include methods to get and delete local storage data.",
+  "keywords": [
+    "Alpine",
+    "Alpine JS",
+    "Alpine JS Plugins",
+    "Local Storage"
+  ],
+  "author": "Mark Mead",
+  "license": "MIT",
+  "main": "dist/storage.cjs.js",
+  "module": "dist/storage.esm.js",
+  "unpkg": "dist/storage.min.js",
+  "scripts": {
+    "build": "node scripts/build.js"
+  },
+  "devDependencies": {
+    "esbuild": "^0.12.22"
+  }
+}
