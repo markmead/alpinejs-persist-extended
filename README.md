@@ -73,7 +73,7 @@ It's very easy to install Alpine JS plugins! 🙌
 ```html
 <script
   defer
-  src="https://unpkg.com/alpinejs-persist-extended@1.0.0/dist/count.min.js"
+  src="https://unpkg.com/alpinejs-persist-extended@1.0.0/dist/storage.min.js"
 ></script>
 
 <script
