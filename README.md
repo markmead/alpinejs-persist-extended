@@ -6,8 +6,8 @@ Alpine JS magic method `$storage` extends the official `$persist` plugin to help
 
 ```html
 <div
-  x-data="{ count: $name('') }"
-  x-on:storage-delete-count.window="name = $storage('name')"
+  x-data="{ name: $persist('') }"
+  x-on:storage-delete.window="name = $storage('name')"
 >
   <h2 x-text="name"></h2>
 
