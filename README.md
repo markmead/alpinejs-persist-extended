@@ -2,67 +2,42 @@
 
 Alpine JS magic method `$storage` extends the official `$persist` plugin to help you work with local storage 📦
 
-You aren't required to use the `$persist` plugin.
-
 ## Example 👀
 
 ```html
 <div
-  x-data="{ count: $persist(0) }"
-  x-on:storage-delete-count.window="count = $storage('_x_count', 'GET')"
+  x-data="{ name: $persist('') }"
+  x-on:storage-delete.window="name = $storage('name')"
 >
-  <h2>Count: <span x-text="count"></span></h2>
+  <h2 x-text="name"></h2>
 
-  <button x-on:click="count++">+</button>
+  <input type="text" x-model="name" />
 
-  <button x-on:click="count--">-</button>
+  <button x-on:click="alert($storage('name'))">Alert Name</button>
 
-  <button x-on:click="alert($storage('_x_count', 'GET'))">Alert</button>
-
-  <button x-on:click="$storage('_x_count', 'DELETE')">Reset</button>
+  <button x-on:click="$storage('name', 'delete')">Delete Name</button>
 </div>
 ```
 
-### GET
+### Get
 
 ```js
-$storage("_x_count", "GET");
+$storage("name");
 ```
 
-Gets the value passed (`_x_count`) from local storage.
+Gets the value from local storage of the provided key. It's not required, but you can pass `'get'` as a second parameter.
 
-_Alpine JS data saved to local storage is prefixed with `\_x_`when using the`$persist` plugin.\_
-
-### DELETE
+### Delete
 
 ```js
-$storage("_x_count", "DELETE");
+$storage("name", "delete");
 ```
 
-Deletes the value passed (`_x_count`) from local storage and emits two events.
+Delete the data from local storage. This also emits an event that you can listen for in Alpine JS.
 
 ```html
-<div x-on:storage-delete.window="..."></div>
-
-<div x-on:storage-delete-count.window="..."></div>
+<div x-on:storage-delete.window="name = $storage('name')"></div>
 ```
-
-#### General
-
-`x-on:storage-delete.window`
-
-General for when local storage data is deleted with the plugin.
-
-#### Specific
-
-`x-on:storage-delete-count.window`
-
-For when specific data from local storage is deleted. It convers the name:
-
-| Alpine JS Key | Event Name                   |
-| ------------- | ---------------------------- |
-| count         | storage-delete-count         |
-| currentCount  | storage-delete-current-count |
 
 ## Install 🌟
 
@@ -73,7 +48,7 @@ It's very easy to install Alpine JS plugins! 🙌
 ```html
 <script
   defer
-  src="https://unpkg.com/alpinejs-persist-extended@1.0.0/dist/storage.min.js"
+  src="https://unpkg.com/alpinejs-persist-extended@latest/dist/storage.min.js"
 ></script>
 
 <script
