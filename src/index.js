@@ -1,18 +1,23 @@
 export default function (Alpine) {
-  Alpine.magic("storage", (el) => (data, type) => {
+  Alpine.magic("storage", (el) => (data, type = "GET") => {
     let methodType = type.toUpperCase();
     let methodTypes = ["GET", "DELETE"];
+    let dataKey = data;
 
     if (!methodTypes.includes(methodType)) {
       console.error(`Expected ${methodTypes} but got ${methodType}.`);
     }
 
+    if (!localStorage.getItem(dataKey)) {
+      dataKey = `_x_${dataKey}`;
+    }
+
     if (methodType === "GET") {
-      return storageGet(data);
+      return storageGet(dataKey);
     }
 
     if (methodType === "DELETE") {
-      storageDelete(el, data);
+      storageDelete(el, dataKey);
     }
   });
 
