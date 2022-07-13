@@ -22,7 +22,7 @@ Alpine JS magic method `$storage` extends the official `$persist` plugin to help
 ### Get
 
 ```js
-$storage("name");
+$storage('name');
 ```
 
 Gets the value from local storage of the provided key. It's not required, but you can pass `'get'` as a second parameter.
@@ -30,7 +30,7 @@ Gets the value from local storage of the provided key. It's not required, but yo
 ### Delete
 
 ```js
-$storage("name", "delete");
+$storage('name', 'delete');
 ```
 
 Delete the data from local storage. This also emits an event that you can listen for in Alpine JS.
@@ -70,8 +70,8 @@ yarn add -D alpinejs-persist-extended
 Then you can register the plugin.
 
 ```js
-import Alpine from "alpinejs";
-import storage from "alpinejs-persist-extended";
+import Alpine from 'alpinejs';
+import storage from 'alpinejs-persist-extended';
 
 Alpine.plugin(storage);
 
