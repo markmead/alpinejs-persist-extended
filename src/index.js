@@ -1,38 +1,40 @@
 export default function (Alpine) {
-  Alpine.magic("storage", (el) => (data, type = "GET") => {
-    let methodType = type.toUpperCase();
-    let methodTypes = ["GET", "DELETE", "CLEAR"];
-    let dataKey = data;
+  Alpine.magic('storage', (el) => (alpineData, requestType = 'GET') => {
+    const crudActions = ['GET', 'DELETE']
 
-    if (!methodTypes.includes(methodType)) {
-      console.error(`Expected ${methodTypes} but got ${methodType}.`);
+    const requestedAction = requestType.toUpperCase()
+
+    let alpineDataKey = alpineData
+
+    if (!crudActions.includes(requestedAction)) {
+      console.error(`Expected ${crudActions} but got ${requestedAction}.`)
     }
 
-    if (!localStorage.getItem(dataKey)) {
-      dataKey = `_x_${dataKey}`;
+    if (!localStorage.getItem(alpineDataKey)) {
+      alpineDataKey = `_x_${alpineDataKey}`
     }
 
-    if (methodType === "GET") {
-      return storageGet(dataKey);
+    if (requestedAction === 'GET') {
+      return storageGet(alpineDataKey)
     }
 
-    if (methodType === "DELETE") {
-      storageDelete(el, dataKey);
+    if (requestedAction === 'DELETE') {
+      storageDelete(el, alpineDataKey)
     }
-  });
+  })
 
-  function storageGet(data) {
-    return localStorage.getItem(data);
+  function storageGet(alpineData) {
+    return localStorage.getItem(alpineData)
   }
 
-  function storageDelete(el, data) {
-    localStorage.removeItem(data);
+  function storageDelete(el, alpineData) {
+    localStorage.removeItem(alpineData)
 
     el.dispatchEvent(
-      new CustomEvent("storage-delete", {
+      new CustomEvent('ls-delete', {
         bubbles: true,
         cancelable: true,
       })
-    );
+    )
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "alpinejs-persist-extended",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Extends the official Alpine JS plugin $persist to include methods to get and delete local storage data.",
   "keywords": [
     "Alpine",
