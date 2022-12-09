@@ -1,5 +1,3 @@
-import storage from "../src/index.js";
+import storage from '../src/index.js'
 
-document.addEventListener("alpine:init", () => {
-  window.Alpine.plugin(storage);
-});
+document.addEventListener('alpine:init', () => window.Alpine.plugin(storage))

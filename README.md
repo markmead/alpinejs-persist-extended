@@ -1,13 +1,14 @@
 # Alpine JS Persist Extended
 
-Alpine JS magic method `$storage` extends the official `$persist` plugin to help you work with local storage 📦
+Alpine JS magic method `$storage` extends the official `$persist` plugin to help
+you work with local storage 📦
 
-## Example 👀
+## Example
 
 ```html
 <div
   x-data="{ name: $persist('') }"
-  x-on:storage-delete.window="name = $storage('name')"
+  x-on:ls-delete.window="name = $storage('name')"
 >
   <h2 x-text="name"></h2>
 
@@ -25,7 +26,8 @@ Alpine JS magic method `$storage` extends the official `$persist` plugin to help
 $storage('name')
 ```
 
-Gets the value from local storage of the provided key. It's not required, but you can pass `'get'` as a second parameter.
+Gets the value from local storage of the provided key. It's not required, but
+you can pass `'get'` as a second parameter.
 
 ### Delete
 
@@ -33,15 +35,14 @@ Gets the value from local storage of the provided key. It's not required, but yo
 $storage('name', 'DELETE')
 ```
 
-Delete the data from local storage. This also emits an event that you can listen for in Alpine JS.
+Delete the data from local storage. This also emits an event that you can listen
+for in Alpine JS.
 
 ```html
-<div x-on:storage-delete.window="name = $storage('name')"></div>
+<div x-on:ls-delete.window="name = $storage('name')"></div>
 ```
 
-## Install 🌟
-
-It's very easy to install Alpine JS plugins! 🙌
+## Install
 
 ### CDN
 
@@ -80,7 +81,7 @@ window.Alpine = Alpine
 Alpine.start()
 ```
 
-### Stats 📊
+### Stats
 
 ![](https://img.shields.io/bundlephobia/min/alpinejs-persist-extended)
 ![](https://img.shields.io/npm/v/alpinejs-persist-extended)
