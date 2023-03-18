@@ -1,50 +1,10 @@
 # Alpine JS Persist Extended
 
-Alpine JS magic method `$storage` extends the official `$persist` plugin to help
-you work with local storage 📦
-
-## Example
-
-```html
-<div
-  x-data="{ name: $persist('') }"
-  x-on:ls-delete.window="name = $storage('name')"
->
-  <h2 x-text="name"></h2>
-
-  <input type="text" x-model="name" />
-
-  <button x-on:click="alert($storage('name'))">Alert Name</button>
-
-  <button x-on:click="$storage('name', 'DELETE')">Delete Name</button>
-</div>
-```
-
-### Get
-
-```js
-$storage('name')
-```
-
-Gets the value from local storage of the provided key. It's not required, but
-you can pass `'get'` as a second parameter.
-
-### Delete
-
-```js
-$storage('name', 'DELETE')
-```
-
-Delete the data from local storage. This also emits an event that you can listen
-for in Alpine JS.
-
-```html
-<div x-on:ls-delete.window="name = $storage('name')"></div>
-```
+Extends the official `$persist` plugin to help you work with `localStorage` 📦
 
 ## Install
 
-### CDN
+### With a CDN
 
 ```html
 <script
@@ -60,15 +20,13 @@ for in Alpine JS.
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 ```
 
-### NPM/Yarn
+### With a Package Manager
 
 ```shell
 npm i -D alpinejs-persist-extended
 
 yarn add -D alpinejs-persist-extended
 ```
-
-Then you can register the plugin.
 
 ```js
 import Alpine from 'alpinejs'
@@ -79,6 +37,44 @@ Alpine.plugin(storage)
 window.Alpine = Alpine
 
 Alpine.start()
+```
+
+## Example
+
+```html
+<div
+  x-data="{ fullName: $persist('') }"
+  @persist:delete.window="fullName = $persistGet('fullName')"
+>
+  <h2 x-text="fullName"></h2>
+
+  <input type="text" x-model="fullName" />
+
+  <button @click="alert($persistGet('fullName'))">Alert Name</button>
+
+  <button @click="$persistDelete('fullName')">Delete Name</button>
+</div>
+```
+
+### Get
+
+```js
+$persistGet('fullName')
+```
+
+Gets the value from `localStorage` of the provided key.
+
+### Delete
+
+```js
+$persistDelete('fullName')
+```
+
+Deletes the data from `localStorage`, it also emits an event that you can listen
+for in Alpine JS.
+
+```html
+<div @persist:delete.window="fullName = $persistGet('fullName')"></div>
 ```
 
 ### Stats
