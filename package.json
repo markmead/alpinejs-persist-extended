@@ -1,23 +1,24 @@
 {
   "name": "alpinejs-persist-extended",
-  "version": "1.0.5",
-  "description": "Extend the functionality of the official Alpine JS $persist plugin 📦",
+  "version": "1.1.0",
+  "description": "Extends the official `$persist` plugin to help you work with `localStorage` 📦",
   "keywords": [
-    "Alpine",
-    "Alpine JS",
-    "Alpine JS Plugins",
     "Alpine JS Local Storage",
+    "Alpine JS Plugins",
+    "Alpine JS",
+    "Alpine",
     "JavaScript Local Storage",
     "Local Storage"
   ],
   "author": "Mark Mead",
   "license": "MIT",
+  "repository": "https://github.com/markmead/alpinejs-persist-extended.git",
   "main": "dist/storage.cjs.js",
   "unpkg": "dist/storage.min.js",
   "scripts": {
     "build": "node scripts/build.js"
   },
   "devDependencies": {
-    "esbuild": "^0.16.2"
+    "esbuild": "^0.17.11"
   }
 }

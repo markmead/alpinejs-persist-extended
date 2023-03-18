@@ -1,40 +1,16 @@
 export default function (Alpine) {
-  Alpine.magic('storage', (el) => (alpineData, requestType = 'GET') => {
-    const crudActions = ['GET', 'DELETE']
-
-    const requestedAction = requestType.toUpperCase()
-
-    let alpineDataKey = alpineData
-
-    if (!crudActions.includes(requestedAction)) {
-      console.error(`Expected ${crudActions} but got ${requestedAction}.`)
-    }
-
-    if (!localStorage.getItem(alpineDataKey)) {
-      alpineDataKey = `_x_${alpineDataKey}`
-    }
-
-    if (requestedAction === 'GET') {
-      return storageGet(alpineDataKey)
-    }
-
-    if (requestedAction === 'DELETE') {
-      storageDelete(el, alpineDataKey)
-    }
+  Alpine.magic('persistGet', () => (storageKey) => {
+    return localStorage.getItem(`_x_${storageKey}`)
   })
 
-  function storageGet(alpineData) {
-    return localStorage.getItem(alpineData)
-  }
-
-  function storageDelete(el, alpineData) {
-    localStorage.removeItem(alpineData)
+  Alpine.magic('persistDelete', (el) => (storageKey) => {
+    localStorage.removeItem(`_x_${storageKey}`)
 
     el.dispatchEvent(
-      new CustomEvent('ls-delete', {
+      new CustomEvent('persist:delete', {
         bubbles: true,
         cancelable: true,
       })
     )
-  }
+  })
 }
