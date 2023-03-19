@@ -1,6 +1,6 @@
 {
   "name": "alpinejs-persist-extended",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Extends the official `$persist` plugin to help you work with `localStorage` 📦",
   "keywords": [
     "Alpine JS Local Storage",
@@ -13,7 +13,7 @@
   "author": "Mark Mead",
   "license": "MIT",
   "repository": "https://github.com/markmead/alpinejs-persist-extended.git",
-  "main": "dist/storage.esm.js",
+  "module": "dist/storage.esm.js",
   "unpkg": "dist/storage.min.js",
   "scripts": {
     "build": "node scripts/build.js"
