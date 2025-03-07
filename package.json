@@ -1,14 +1,13 @@
 {
   "name": "alpinejs-persist-extended",
-  "version": "1.1.3",
-  "description": "Extends the official `$persist` plugin to help you work with `localStorage` 📦",
+  "version": "1.2.0",
+  "description": "Extends Alpine JS official `$persist` plugin with enhanced localStorage functionality, expiration support, and custom storage options 📦",
   "keywords": [
-    "Alpine JS Local Storage",
-    "Alpine JS Plugins",
-    "Alpine JS",
-    "Alpine",
-    "JavaScript Local Storage",
-    "Local Storage"
+    "alpine",
+    "alpinejs",
+    "persist",
+    "storage",
+    "localstorage"
   ],
   "author": "Mark Mead",
   "license": "MIT",

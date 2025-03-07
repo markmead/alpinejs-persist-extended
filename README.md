@@ -1,31 +1,47 @@
 # Alpine JS Persist Extended
 
-Extends the official `$persist` plugin to help you work with `localStorage` 📦
+![](https://img.shields.io/bundlephobia/min/alpinejs-persist-extended)
+![](https://img.shields.io/npm/v/alpinejs-persist-extended)
+![](https://img.shields.io/npm/dt/alpinejs-persist-extended)
+![](https://img.shields.io/github/license/markmead/alpinejs-persist-extended)
+
+Extends the official Alpine JS `$persist` plugin with additional utilities to
+help you work with `localStorage` more effectively. This plugin adds methods to
+get and delete persisted data without needing to set up additional data
+properties.
+
+## Benefits
+
+- 📌 `$persistGet`: Retrieve persisted data directly from localStorage without
+  defining an x-data property
+- 🗑️ `$persistDelete`: Remove items from localStorage and trigger custom events
+- 🔄 Works seamlessly alongside the official Alpine JS persist plugin
+- 🪶 Lightweight solution (under 1KB minified)
+- ⛓️ Zero dependencies beyond Alpine JS and the official persist plugin
 
 ## Install
 
-### With a CDN
+### CDN
 
 ```html
 <script
   defer
-  src="https://unpkg.com/alpinejs-persist-extended@latest/dist/storage.min.js"
+  src="https://unpkg.com/alpinejs-persist-extended@latest/dist/cdn.min.js"
 ></script>
 
 <script
   defer
-  src="https://unpkg.com/@alpinejs/persist@3.x.x/dist/cdn.min.js"
+  src="https://unpkg.com/@alpinejs/persist@latest/dist/cdn.min.js"
 ></script>
 
-<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script defer src="https://unpkg.com/alpinejs@latest/dist/cdn.min.js"></script>
 ```
 
-### With a Package Manager
+### Package
 
 ```shell
-npm i -D alpinejs-persist-extended
-
 yarn add -D alpinejs-persist-extended
+npm install -D alpinejs-persist-extended
 ```
 
 ```js
@@ -41,45 +57,57 @@ Alpine.start()
 
 ## Example
 
+Here's a practical example showing how to use the extended persist
+functionality:
+
 ```html
 <div
-  x-data="{ fullName: $persist('') }"
-  @persist:delete.window="fullName = $persistGet('fullName')"
+  x-data="{ name: $persist('Rob Brydon') }"
+  @persist:delete.window="name = ''"
 >
-  <h2 x-text="fullName"></h2>
+  <h2 x-text="name"></h2>
 
-  <input type="text" x-model="fullName" />
+  <input type="text" x-model="name" placeholder="Enter your name" />
 
-  <button @click="alert($persistGet('fullName'))">Alert Name</button>
+  <button type="button" @click="alert($persistGet('name'))">
+    Show persisted name
+  </button>
 
-  <button @click="$persistDelete('fullName')">Delete Name</button>
+  <button type="button" @click="$persistDelete('name')">Reset name</button>
 </div>
 ```
+
+In this example:
+
+- We initialize a persisted `name` property that saves to localStorage
+- When the name is deleted, we listen for the `persist:delete` event
+- We provide UI controls to view and delete the persisted data
+
+## API Reference
 
 ### Get
 
 ```js
-$persistGet('fullName')
+$persistGet('name')
 ```
 
-Gets the value from `localStorage` of the provided key.
+Gets the value from `localStorage` for the provided key. This is useful when you
+need to access persisted data without having to define it in your `x-data`
+object.
 
 ### Delete
 
 ```js
-$persistDelete('fullName')
+$persistDelete('name')
 ```
 
-Deletes the data from `localStorage`, it also emits an event that you can listen
-for in Alpine JS.
+Removes the data from `localStorage` for the specified key. When called, it also
+dispatches a `persist:delete` custom event that you can listen for in your
+Alpine components.
 
 ```html
-<div @persist:delete.window="fullName = $persistGet('fullName')"></div>
+<div @persist:delete.window="name = ''"></div>
 ```
 
-### Stats
-
-![](https://img.shields.io/bundlephobia/min/alpinejs-persist-extended)
-![](https://img.shields.io/npm/v/alpinejs-persist-extended)
-![](https://img.shields.io/npm/dt/alpinejs-persist-extended)
-![](https://img.shields.io/github/license/markmead/alpinejs-persist-extended)
+The event listener pattern is particularly useful for resetting related data or
+updating UI elements when persistence is cleared.
