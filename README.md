@@ -1,5 +1,8 @@
 # Alpine JS Persist Extended
 
+> [!IMPORTANT] 
+> This plugin is no longer maintained or supported.
+
 ![](https://img.shields.io/bundlephobia/min/alpinejs-persist-extended)
 ![](https://img.shields.io/npm/v/alpinejs-persist-extended)
 ![](https://img.shields.io/npm/dt/alpinejs-persist-extended)
