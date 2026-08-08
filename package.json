@@ -1,23 +1,45 @@
 {
   "name": "alpinejs-persist-extended",
-  "version": "1.2.0",
-  "description": "Extends Alpine JS official `$persist` plugin with enhanced localStorage functionality, expiration support, and custom storage options 📦",
+  "version": "2.0.0",
+  "description": "Extends the official Alpine JS `$persist` plugin with expiring values and imperative read, write, delete and clear helpers 📦",
   "keywords": [
     "alpine",
     "alpinejs",
+    "alpinejs-plugin",
     "persist",
     "storage",
-    "localstorage"
+    "localstorage",
+    "expiry",
+    "ttl"
   ],
-  "author": "Mark Mead",
   "license": "MIT",
-  "repository": "https://github.com/markmead/alpinejs-persist-extended.git",
-  "module": "dist/esm.min.js",
+  "author": "Mark Mead",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/markmead/alpinejs-persist-extended.git"
+  },
+  "homepage": "https://github.com/markmead/alpinejs-persist-extended#readme",
+  "bugs": "https://github.com/markmead/alpinejs-persist-extended/issues",
+  "main": "dist/module.cjs",
+  "module": "dist/module.mjs",
   "unpkg": "dist/cdn.min.js",
+  "exports": {
+    ".": {
+      "import": "./dist/module.mjs",
+      "require": "./dist/module.cjs",
+      "default": "./dist/module.mjs"
+    },
+    "./dist/*": "./dist/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "node scripts/build.js"
+    "build": "node scripts/build.mjs"
   },
   "devDependencies": {
-    "esbuild": "^0.25.0"
-  }
+    "esbuild": "^0.28.1"
+  },
+  "packageManager": "pnpm@11.1.3"
 }

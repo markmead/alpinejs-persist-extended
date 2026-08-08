@@ -1,3 +1,3 @@
-import storage from "../src/index.js";
+import persistExtended from '../src/index.js'
 
-export default storage;
+export default persistExtended
