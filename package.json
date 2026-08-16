@@ -39,7 +39,7 @@
     "build": "node scripts/build.mjs"
   },
   "devDependencies": {
-    "esbuild": "^0.28.1"
+    "esbuild": "^0.28.2"
   },
   "packageManager": "pnpm@11.1.3"
 }
