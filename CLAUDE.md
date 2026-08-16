@@ -55,7 +55,27 @@ Where an option key is a single word, destructure it to a two-word local
 
 ## Architecture
 
-`src/index.js` is the whole implementation. Everything else is packaging:
+`src/` splits by concern, with `index.js` doing nothing but wiring:
+
+- `constants.js` — the `_x_` prefix and `__x_expires` suffix. Imported by
+  everything; depends on nothing.
+- `duration.js` — `parseDuration`, the only place that knows about `'7d'`.
+- `entries.js` — key resolution and the read/write/remove primitives for a
+  stored entry. **The only module that builds a sidecar key**, so the value and
+  its expiry cannot drift apart.
+- `storage.js` — `localStorage` probing and the in-memory fallback shim.
+- `events.js` — event dispatch and the root element used by the `Alpine.*`
+  helpers.
+- `helpers.js` — `createPersistHelpers(defaultStorage)`, the four imperative
+  magics, closing over the resolved default storage.
+- `expiring.js` — `createExpiringInterceptor`, the `$persistExpire` interceptor.
+- `index.js` — resolves storage, builds the helpers, registers the magics.
+
+Import direction is one-way (`index` → `helpers`/`expiring` → `entries` →
+`constants`), so there are no cycles. Keep it that way; `entries.js` must not
+import from `helpers.js` or `expiring.js`.
+
+Everything else is packaging:
 
 - `builds/cdn.js` — browser entry; self-registers on `alpine:init` against
   `window.Alpine`.

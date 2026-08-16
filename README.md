@@ -28,7 +28,7 @@ reactive property bound to it. That leaves two gaps this plugin fills:
 - 🧹 `$persistClear`: sweep every Alpine-persisted key, optionally by prefix
 - 🤝 Byte-compatible with `$persist`'s storage format, including `.as()` and
   `.using()`
-- 🪶 ~1.4KB gzipped, zero dependencies beyond Alpine JS
+- 🪶 ~1.5KB gzipped, zero dependencies beyond Alpine JS
 
 ## Install
 
