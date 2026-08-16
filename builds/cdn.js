@@ -1,3 +1,5 @@
-import storage from '../src/index.js'
+import persistExtended from '../src/index.js'
 
-document.addEventListener('alpine:init', () => window.Alpine.plugin(storage))
+document.addEventListener('alpine:init', () =>
+  window.Alpine.plugin(persistExtended)
+)
