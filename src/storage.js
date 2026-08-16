@@ -1,11 +1,12 @@
-import { KEY_PREFIX } from './constants.js'
+// Deliberately outside the `_x_` namespace: probing writes and then removes the
+// key, so anything a component could persist there would be destroyed before it
+// was ever restored.
+const PROBE_KEY = '__x_persist_extended_probe'
 
 export function resolveDefaultStorage() {
-  const probeKey = `${KEY_PREFIX}probe`
-
   try {
-    localStorage.setItem(probeKey, probeKey)
-    localStorage.removeItem(probeKey)
+    localStorage.setItem(PROBE_KEY, PROBE_KEY)
+    localStorage.removeItem(PROBE_KEY)
 
     return localStorage
   } catch {

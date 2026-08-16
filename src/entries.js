@@ -17,10 +17,20 @@ export function resolveLookupKey(storageTarget, persistKey) {
   return prefixedKey
 }
 
+// A sidecar that does not read as a timestamp counts as already expired rather
+// than as "no expiry": the key was asked to expire and we can no longer tell
+// when, so sweeping it is the safe reading. Returning `null` would make a
+// corrupt sidecar silently pin the value in storage forever.
 export function readExpiresAt(storageTarget, lookupKey) {
   const rawExpiry = storageTarget.getItem(`${lookupKey}${EXPIRES_SUFFIX}`)
 
-  return rawExpiry === null ? null : Number(rawExpiry)
+  if (rawExpiry === null) {
+    return null
+  }
+
+  const expiresAt = Number(rawExpiry)
+
+  return Number.isFinite(expiresAt) ? expiresAt : 0
 }
 
 export function hasExpired(storageTarget, lookupKey) {
